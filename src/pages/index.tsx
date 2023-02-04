@@ -1,7 +1,10 @@
+import { CheckButton } from "@/components/CheckButton";
+
 export default function Home() {
   return (
     <>
-      Hello world!
+      Hello World!
+      <CheckButton></CheckButton>
     </>
   )
 }
