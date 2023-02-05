@@ -5,7 +5,7 @@ export function CheckButton() {
     
     return(
         <button
-            type="button"
+            type="submit"
             onClick={handleCheck}    
         >
             Check
