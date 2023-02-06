@@ -2,14 +2,8 @@ import { CheckButton } from "@/components/CheckButton";
 import Head from 'next/head'
 import { FormEvent, useState, useEffect } from "react";
 import axios from 'axios';
+import { Verb } from './interfaces/verbInterface';
 
-interface VerbTense {
-    [key: string]: String[];
-}
-
-interface Verb {
-    [key: string]: VerbTense;
-}
 
 export default function Home() {
     const [answer, setAnswer] = useState('');
