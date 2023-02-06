@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import { FormEvent, useState, useEffect } from "react";
-import axios from 'axios';
+
 import verblist from '../verblist.json';
 const FrenchVerbs = require('french-verbs');
 const Lefff = require('french-verbs-lefff/dist/conjugations.json');
 
-
 import { CheckButton } from "@/components/CheckButton";
-import { Verb } from './interfaces/verbInterface';
 import { VerbsInfo } from 'french-verbs-lefff';
+
+import styles from './home.module.scss'
 
 interface Question {
     verb: string,
@@ -43,34 +43,37 @@ export default function Home() {
     }
 
     async function handleGetNewVerb() {
-        setVerb(getRandomVerb('top50verbs'))
-        
-        //await axios.get('/api/getVerbs').then((response) => setVerb(response.data));
-        //console.log(verblist.top25verbs);
+        setVerb(getRandomVerb('top25verbs'))
+
     }
-    
+
     return (
         <>
             <Head>
                 <title>Conjuguons!</title>
             </Head>
 
-            Verbo: {verb ?? ''}
-            <p/>
-            
-            <form onSubmit={handleSubmitAnswer}>
-                <input 
-                    onChange={e => setAnswer(e.target.value)}
-                />
-                <CheckButton/>
-            </form>
-            <p/>
-            <button
-                type="button"
-                onClick={handleGetNewVerb}
-            > 
-                Get New Verb
-            </button>
+            <main className={styles.contentContainer}>
+                Verbo: {verb ?? ''}
+                <p />
+
+                <form onSubmit={handleSubmitAnswer}>
+                    <input
+                        onChange={e => setAnswer(e.target.value)}
+                    />
+                    <CheckButton />
+                </form>
+
+                <p />
+
+                <button
+                    type="button"
+                    onClick={handleGetNewVerb}
+                >
+                    Get New Verb
+                </button>
+
+            </main>
         </>
     )
 }

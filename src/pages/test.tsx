@@ -1,12 +1,8 @@
 
-const FrenchVerbs = require('french-verbs');
-const Lefff = require('french-verbs-lefff/dist/conjugations.json');
-
-
-
 export default function Test() {
-    
+    const a = '1';
+    const b = 2;
+    const c = a + b;
 
-// elle est allée
-console.log('je ' + FrenchVerbs.getConjugation(Lefff, 'finir', 'PRESENT', 2));
+    console.log(c);
 }
