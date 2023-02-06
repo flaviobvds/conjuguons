@@ -25,12 +25,13 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 
     const db = await connectToDatabase();
     const collection = db.collection('verbslist');
-    const cursor = collection.find({
-        'Infinitif.Présent': 'aller'
-    });
+    
+    const cursor = collection.aggregate([
+        { $sample: { size: 1 } }
+    ]);
+
     const verb = await cursor.next();
 
-
-    return response.json({ message: verb });
+    return response.json(verb);
 
 }

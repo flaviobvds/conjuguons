@@ -1,15 +1,24 @@
 import { CheckButton } from "@/components/CheckButton";
 import Head from 'next/head'
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import axios from 'axios';
+
+interface VerbTense {
+    [key: string]: String[];
+}
+
+interface Verb {
+    [key: string]: VerbTense;
+}
 
 export default function Home() {
     const [answer, setAnswer] = useState('');
-   
+    const [verb, setVerb] = useState<Verb>({});
+
     function handleSubmitAnswer(event: FormEvent) {
         event.preventDefault();
         
-        axios.post('/api/getVerbs', {answer: answer})
+        axios.post('/api/getVerbs', {answer: answer}).then((response) => setVerb(response.data));
     }
     
     return (
@@ -18,8 +27,8 @@ export default function Home() {
                 <title>Conjuguons!</title>
             </Head>
 
-            {console.log(answer)}
-            <p></p>
+            Verbo: {verb?.Infinitif?.Présent ?? null}
+            <p/>
             
             <form onSubmit={handleSubmitAnswer}>
                 <input 
