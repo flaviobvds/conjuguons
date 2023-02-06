@@ -1054,6 +1054,11 @@ french-contractions@4.2.6:
   resolved "https://registry.yarnpkg.com/french-contractions/-/french-contractions-4.2.6.tgz#10503fb6729efebecb160adf45fa40efc43e187e"
   integrity sha512-wUaQsaxj2FTF9o4lBgjugYYlz87gYMJdzU7EsHZX0YIRejCytcUnZNeMNflXjJTMf7zjKUer915IilLBPzK7CQ==
 
+french-verbs-lefff@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/french-verbs-lefff/-/french-verbs-lefff-2.2.6.tgz#14991f2049900cbe0a954ccd85499d386a112545"
+  integrity sha512-+hXViaMn+EhG0Pghg2OJhHAyW8QaqPCFPhPqHyOat3xlUdu3N0RyqTUD/T3HRSFyq9YpBZc1ySusHUerUEBIJA==
+
 french-verbs-transitive@2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/french-verbs-transitive/-/french-verbs-transitive-2.2.6.tgz#026092e5d7e1f3522a81486a9fd1cf6fc7a41412"
