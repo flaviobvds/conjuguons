@@ -1049,6 +1049,24 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+french-contractions@4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/french-contractions/-/french-contractions-4.2.6.tgz#10503fb6729efebecb160adf45fa40efc43e187e"
+  integrity sha512-wUaQsaxj2FTF9o4lBgjugYYlz87gYMJdzU7EsHZX0YIRejCytcUnZNeMNflXjJTMf7zjKUer915IilLBPzK7CQ==
+
+french-verbs-transitive@2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/french-verbs-transitive/-/french-verbs-transitive-2.2.6.tgz#026092e5d7e1f3522a81486a9fd1cf6fc7a41412"
+  integrity sha512-EClXivJgS122no3f0i5OyPDZmn09phpaUEM4P5bNUi/9hKEpoBa0zZzAdfIEC6vh8gbNjaG5O/EOuXMOQuAtGA==
+
+french-verbs@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/french-verbs/-/french-verbs-4.2.6.tgz#19bd3e133a9c399f0ba2fabe1d709c024b9decfb"
+  integrity sha512-v36+M4bMmL0PDbrnUUg8PXu8lBkzgfUfWPawgKNUf6VvvuWNpxXcpYcawUBHqR/kzCuy58rPEKXJmwH8ZuUWRw==
+  dependencies:
+    french-contractions "4.2.6"
+    french-verbs-transitive "2.2.6"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"

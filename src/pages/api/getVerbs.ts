@@ -21,7 +21,6 @@ async function connectToDatabase() {
 
 
 export default async (request: VercelRequest, response: VercelResponse) => {
-    const { answer } = request.body;
 
     const db = await connectToDatabase();
     const collection = db.collection('verbslist');

@@ -1,7 +1,10 @@
-import { CheckButton } from "@/components/CheckButton";
 import Head from 'next/head'
 import { FormEvent, useState, useEffect } from "react";
 import axios from 'axios';
+import FrenchVerbs from 'french-verbs';
+import verblist from '../allverbs.json';
+
+import { CheckButton } from "@/components/CheckButton";
 import { Verb } from './interfaces/verbInterface';
 
 
@@ -12,7 +15,11 @@ export default function Home() {
     function handleSubmitAnswer(event: FormEvent) {
         event.preventDefault();
         
-        axios.post('/api/getVerbs', {answer: answer}).then((response) => setVerb(response.data));
+    }
+
+    async function handleGetNewVerb() {
+        await axios.get('/api/getVerbs').then((response) => setVerb(response.data));
+        console.log(verblist.top25verbs);
     }
     
     return (
@@ -30,6 +37,13 @@ export default function Home() {
                 />
                 <CheckButton/>
             </form>
+            <p/>
+            <button
+                type="button"
+                onClick={handleGetNewVerb}
+            > 
+                Get New Verb
+            </button>
         </>
     )
 }
