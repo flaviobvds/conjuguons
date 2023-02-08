@@ -11,8 +11,9 @@ export function SettingsModal({ isOpen, onRequestClose }: SettingsModalProps) {
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             overlayClassName="react-modal-overlay"
+            className="react-modal-content"
         >
-
+            Teste
         </Modal>
     )
 }

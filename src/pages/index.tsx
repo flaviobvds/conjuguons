@@ -8,9 +8,18 @@ import styles from './home.module.scss'
 
 export default function Home() {
     const settings = {
-        subjects: [0,1,2,3,4,5],
+        subjects: [0, 1, 2, 3, 4, 5],
         verbs: "top25verbs" as const,
-        verbTenses: ['PRESENT', 'PRESENT', 'FUTUR', 'IMPARFAIT', 'PASSE_SIMPLE', 'CONDITIONNEL_PRESENT', 'IMPERATIF_PRESENT', 'SUBJONCTIF_PRESENT', 'SUBJONCTIF_IMPARFAIT', 'PASSE_COMPOSE', 'PLUS_QUE_PARFAIT']
+        verbTenses: ['PRESENT', 'FUTUR', 'IMPARFAIT', 'PASSE_SIMPLE', 'CONDITIONNEL_PRESENT', 'IMPERATIF_PRESENT', 'SUBJONCTIF_PRESENT', 'SUBJONCTIF_IMPARFAIT', 'PASSE_COMPOSE', 'PLUS_QUE_PARFAIT']
+    }
+
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+
+    function handleOpenSettingsModal() {
+        setIsSettingsModalOpen(true);
+    }
+    function handleCloseSettingsModal() {
+        setIsSettingsModalOpen(false);
     }
 
     return (
@@ -19,7 +28,11 @@ export default function Home() {
                 <title>Conjuguons!</title>
             </Head>
 
-            <QuestionContainer questionsettings={settings}/>
+            <QuestionContainer questionsettings={settings} />
+            <SettingsModal
+                isOpen={isSettingsModalOpen}
+                onRequestClose={handleCloseSettingsModal}
+            />
 
         </>
     )
