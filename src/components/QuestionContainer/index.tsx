@@ -30,9 +30,7 @@ function getRandomVerb(listType: 'top25verbs' | 'top50verbs' | 'top100verbs' | '
 
 function getRandomSubject(possibleSubjects: number[]) {
     const index = Math.floor(Math.random() * possibleSubjects.length);
-    const subjectIndex = possibleSubjects[index];
-    const subjects = ['Je', 'Tu', 'Il', 'Nous', 'Vous', 'Ils']
-    const subject = subjects[subjectIndex]
+    const subject = possibleSubjects[index];
     return subject;
 }
 
@@ -49,39 +47,54 @@ function getConjugation(question: Question) {
 
 export function QuestionContainer({questionsettings}: QuestionContainerProps) {
     const [answer, setAnswer] = useState('');
-    const [verb, setVerb] = useState<string>('');
-    const [subject, setSubject] = useState<string>('');
-    const [verbTense, setVerbTense] = useState<string>('');
+    const [verb, setVerb] = useState('');
+    const [subject, setSubject] = useState(0);
+    const [verbTense, setVerbTense] = useState('');
+    const [status, setStatus] = useState('');
 
     function handleSubmitAnswer(event: FormEvent) {
         event.preventDefault();
         const conjugation = getConjugation({
             verb: verb,
-            tense: 'PRESENT',
-            person: 0
+            tense: verbTense,
+            person: subject
         })
-        console.log(conjugation);
+        answer === conjugation ? setStatus('correct') : setStatus('incorrect')
+        console.log(conjugation)
     }
 
     function handleGetNewQuestion() {
         setVerb(getRandomVerb(questionsettings.verbs))
         setSubject(getRandomSubject(questionsettings.subjects))
         setVerbTense(getRandomVerbTense(questionsettings.verbTenses))
+        setStatus('')
+        setAnswer('')
+    }
+
+    function getSubjectName(subjectIndex: number) {
+        const subjects = ['Je', 'Tu', 'Il', 'Nous', 'Vous', 'Ils']
+        const subject = subjects[subjectIndex]
+        return subject
     }
 
     return (
         <main className={styles.contentContainer}>
-            Verbo: {verb ?? ''}
+            Verbo: {verb ?? ''} <br/>
+            Tempo: {verbTense ?? ''}
             <p />
 
             <form onSubmit={handleSubmitAnswer}>
+                {getSubjectName(subject)}
                 <input
                     onChange={e => setAnswer(e.target.value)}
+                    value={answer}
                 />
                 <CheckButton />
             </form>
 
-            <p />
+            <p/>
+            {status}
+            <p/>
 
             <button
                 type="button"
