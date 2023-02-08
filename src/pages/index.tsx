@@ -1,6 +1,8 @@
 import { QuestionContainer } from '@/components/QuestionContainer';
 import Head from 'next/head'
-import { FormEvent, useState, useEffect } from "react";
+import { useState } from "react";
+
+import { SettingsModal } from '@/components/SettingsModal';
 
 import styles from './home.module.scss'
 
