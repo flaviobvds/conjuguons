@@ -1,5 +1,7 @@
 import Modal from 'react-modal';
 
+import styles from './settingsModal.module.scss'
+
 interface SettingsModalProps {
     isOpen: boolean;
     onRequestClose: () => void;

@@ -12,6 +12,7 @@ interface Question {
     tense: string,
     person: number,
     gender?: 'M' | 'F'
+    number?: 'P' | 'S'
 }
 
 interface QuestionContainerProps {
@@ -40,46 +41,93 @@ function getRandomVerbTense(possibleVerbTenses: string[]) {
     return verbTense;
 }
 
-function getConjugation(question: Question) {
-    const conjugation = FrenchVerbs.getConjugation(Lefff as VerbsInfo, question.verb, question.tense, question.person)
-    return conjugation;
+function getAuxiliary(verb: string) {
+    return FrenchVerbs.alwaysAuxEtre(verb) ? 'ETRE' : 'AVOIR'
 }
 
-export function QuestionContainer({questionsettings}: QuestionContainerProps) {
+function getConjugation(question: Question) {
+    console.log(question)
+    if (question.tense == 'PASSE_COMPOSE' || 'PLUS_QUE_PARFAIT') return (
+        FrenchVerbs.getConjugation(Lefff as VerbsInfo, question.verb, question.tense, question.person, {
+            aux: getAuxiliary(question.verb),
+            agreeGender: question.gender ?? undefined,
+            agreeNumber: question.number ?? undefined
+        })
+    )
+    return FrenchVerbs.getConjugation(Lefff as VerbsInfo, question.verb, question.tense, question.person)
+}
+
+export function QuestionContainer({ questionsettings }: QuestionContainerProps) {
     const [answer, setAnswer] = useState('');
     const [verb, setVerb] = useState('');
     const [subject, setSubject] = useState(0);
     const [verbTense, setVerbTense] = useState('');
     const [status, setStatus] = useState('');
+    const verbsDetectifs = [
+        'grêler', 'neiger', 'barder', 'advenir', 'bruiner', 'dracher',
+        "s'agir", 'venter', 'apparoir', 'pleuvoir', 'falloir'
+    ]
+
+    // if verb is detectif, always use subject IL (index 2), if not, get random subject
+    useEffect(() => {
+        if (verbsDetectifs.includes(verb)) {
+            console.log('detectif')
+            setSubject(2)
+        } else {
+            setSubject(getRandomSubject(questionsettings.subjects))
+        }
+    }, [verb])
 
     function handleSubmitAnswer(event: FormEvent) {
         event.preventDefault();
+
+        function newSubject(subject: number) {
+            const aux = getAuxiliary(verb)
+            
+            // if subject is ELLE (index 6), consider it IL (index 2). Female if aux is ETRE
+            if (subject == 6) return {
+                subject: 2,
+                gender: aux == "ETRE" ? 'F' : 'M',
+                number: 'S'
+            }
+            // if subject is ELLES (index 7), consider it ILS (index 5). Female & plural if aux is ETRE
+            if (subject == 7) return {
+                subject: 5,
+                gender: aux == "ETRE" ? 'F' : 'M',
+                number: aux == "ETRE" ? 'P' : 'S',
+            }
+            return {
+                subject: subject
+            }
+        }
+
         const conjugation = getConjugation({
             verb: verb,
             tense: verbTense,
-            person: subject
+            person: newSubject(subject).subject,
+            gender: newSubject(subject).gender as 'M' | 'F' ?? undefined, // if subject is ELLE, set gender
+            number: newSubject(subject).number as 'S' | 'P' ?? undefined, // if subject is ELLES, set gender and number
         })
         answer === conjugation ? setStatus('correct') : setStatus('incorrect')
         console.log(conjugation)
     }
 
     function handleGetNewQuestion() {
-        setVerb(getRandomVerb(questionsettings.verbs))
-        setSubject(getRandomSubject(questionsettings.subjects))
+        setVerb(getRandomVerb(questionsettings.verbs)) // this will also trigger getRandomSubject inside useEffect
         setVerbTense(getRandomVerbTense(questionsettings.verbTenses))
         setStatus('')
         setAnswer('')
     }
 
     function getSubjectName(subjectIndex: number) {
-        const subjects = ['Je', 'Tu', 'Il', 'Nous', 'Vous', 'Ils']
+        const subjects = ['Je', 'Tu', 'Il', 'Nous', 'Vous', 'Ils', 'Elle', 'Elles']
         const subject = subjects[subjectIndex]
         return subject
     }
 
     return (
         <main className={styles.contentContainer}>
-            Verbo: {verb ?? ''} <br/>
+            Verbo: {verb ?? ''} <br />
             Tempo: {verbTense ?? ''}
             <p />
 
@@ -92,9 +140,9 @@ export function QuestionContainer({questionsettings}: QuestionContainerProps) {
                 <CheckButton />
             </form>
 
-            <p/>
+            <p />
             {status}
-            <p/>
+            <p />
 
             <button
                 type="button"
