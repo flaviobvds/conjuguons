@@ -8,7 +8,7 @@ import styles from './home.module.scss'
 
 export default function Home() {
     const settings = {
-        subjects: [6,7],
+        subjects: [1,2,3,4,5,6,7],
         verbs: "top25verbs" as const,
         verbTenses: ['PASSE_COMPOSE', 'PLUS_QUE_PARFAIT']
     }
