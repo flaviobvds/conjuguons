@@ -83,14 +83,14 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
 
         function newSubject(subject: number) {
             const aux = getAuxiliary(verb)
-            
-            // if subject is ELLE (index 6), consider it IL (index 2). Female if aux is ETRE
+
+            // if subject is ELLE (index 6), consider it IL (index 2). Use female if aux is ETRE
             if (subject == 6) return {
                 subject: 2,
                 gender: aux == "ETRE" ? 'F' : 'M',
                 number: 'S'
             }
-            // if subject is ELLES (index 7), consider it ILS (index 5). Female & plural if aux is ETRE
+            // if subject is ELLES (index 7), consider it ILS (index 5). Use female & plural if aux is ETRE
             if (subject == 7) return {
                 subject: 5,
                 gender: aux == "ETRE" ? 'F' : 'M',
@@ -125,31 +125,52 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
         return subject
     }
 
+    function fixTenseName(tense: string) {
+        const tenses = {
+            'PRESENT': 'Indicatif - Présent',
+            'FUTUR': 'Indicatif - Futur Simple', 
+            'IMPARFAIT': 'Indicatif - Imparfait', 
+            'PASSE_SIMPLE': 'Indicatif - Passé Simple', 
+            'CONDITIONNEL_PRESENT': 'Conditionnel - Présent', 
+            'SUBJONCTIF_PRESENT': 'Subjonctif - Présent', 
+            'SUBJONCTIF_IMPARFAIT': 'Subjonctif - Imparfait', 
+            'PASSE_COMPOSE': 'Indicatif - Passé Composé', 
+            'PLUS_QUE_PARFAIT': 'Indicatif - Plus que Parfait'
+        }
+        return tenses[tense as keyof typeof tenses];
+    }
+
+    function capitalizeVerb(verb: string) {
+        return verb.charAt(0).toUpperCase() + verb.slice(1);
+    }
+
     return (
         <main className={styles.contentContainer}>
-            Verbo: {verb ?? ''} <br />
-            Tempo: {verbTense ?? ''}
-            <p />
+            
+            <h1 className={styles.title}> Conjuguons! </h1>
+            <div className={styles.questionContainer}>
+                Verbo: {capitalizeVerb(verb) ?? ''} <br />
+                {fixTenseName(verbTense) ?? ''}
 
-            <form onSubmit={handleSubmitAnswer}>
-                {getSubjectName(subject)}
-                <input
-                    onChange={e => setAnswer(e.target.value)}
-                    value={answer}
-                />
-                <CheckButton />
-            </form>
+                <form onSubmit={handleSubmitAnswer}>
+                    {getSubjectName(subject)}
+                    <input
+                        onChange={e => setAnswer(e.target.value)}
+                        value={answer}
+                    />
+                    <button type="submit">
+                        Check
+                    </button>
+                </form>
+                {status}
 
-            <p />
-            {status}
-            <p />
-
-            <button
-                type="button"
-                onClick={handleGetNewQuestion}
-            >
-                Get New Verb
-            </button>
+                <button
+                    type="button"
+                    onClick={handleGetNewQuestion}
+                >
+                    Get New Verb
+                </button>
+            </div>
 
         </main>
     );
