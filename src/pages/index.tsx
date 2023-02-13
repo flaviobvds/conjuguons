@@ -5,6 +5,7 @@ import { useState } from "react";
 import { SettingsModal } from '@/components/SettingsModal';
 
 import styles from './home.module.scss'
+import { Header } from '@/components/Header';
 
 export default function Home() {
     const settings = {
@@ -28,6 +29,7 @@ export default function Home() {
                 <title>Conjuguons!</title>
             </Head>
 
+            <Header />
             <QuestionContainer questionsettings={settings} />
             <SettingsModal
                 isOpen={isSettingsModalOpen}

@@ -2,7 +2,6 @@ import { FormEvent, useState, useEffect } from "react";
 import verblist from '../../verblist.json';
 const FrenchVerbs = require('french-verbs');
 const Lefff = require('french-verbs-lefff/dist/conjugations.json');
-import { CheckButton } from "@/components/CheckButton";
 import { VerbsInfo } from 'french-verbs-lefff';
 
 import styles from './questioncontainer.module.scss'
@@ -167,6 +166,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
                 <button
                     type="button"
                     onClick={handleGetNewQuestion}
+                    className={styles.getNewVerbButton}
                 >
                     Get New Verb
                 </button>
