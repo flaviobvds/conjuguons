@@ -19,7 +19,8 @@ interface QuestionContainerProps {
         subjects: number[],
         verbs: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs',
         verbTenses: string[]
-    }
+    },
+    lang: string
 }
 
 function getRandomVerb(listType: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs') {
@@ -56,7 +57,7 @@ function getConjugation(question: Question) {
     return FrenchVerbs.getConjugation(Lefff as VerbsInfo, question.verb, question.tense, question.person)
 }
 
-export function QuestionContainer({ questionsettings }: QuestionContainerProps) {
+export function QuestionContainer({ questionsettings, lang }: QuestionContainerProps) {
     const [answer, setAnswer] = useState('');
     const [verb, setVerb] = useState('');
     const [subject, setSubject] = useState(0);
@@ -127,13 +128,13 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
     function fixTenseName(tense: string) {
         const tenses = {
             'PRESENT': 'Indicatif - Présent',
-            'FUTUR': 'Indicatif - Futur Simple', 
-            'IMPARFAIT': 'Indicatif - Imparfait', 
-            'PASSE_SIMPLE': 'Indicatif - Passé Simple', 
-            'CONDITIONNEL_PRESENT': 'Conditionnel - Présent', 
-            'SUBJONCTIF_PRESENT': 'Subjonctif - Présent', 
-            'SUBJONCTIF_IMPARFAIT': 'Subjonctif - Imparfait', 
-            'PASSE_COMPOSE': 'Indicatif - Passé Composé', 
+            'FUTUR': 'Indicatif - Futur Simple',
+            'IMPARFAIT': 'Indicatif - Imparfait',
+            'PASSE_SIMPLE': 'Indicatif - Passé Simple',
+            'CONDITIONNEL_PRESENT': 'Conditionnel - Présent',
+            'SUBJONCTIF_PRESENT': 'Subjonctif - Présent',
+            'SUBJONCTIF_IMPARFAIT': 'Subjonctif - Imparfait',
+            'PASSE_COMPOSE': 'Indicatif - Passé Composé',
             'PLUS_QUE_PARFAIT': 'Indicatif - Plus que Parfait'
         }
         return tenses[tense as keyof typeof tenses];
@@ -145,23 +146,43 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
 
     return (
         <main className={styles.contentContainer}>
-            
-            <h1 className={styles.title}> Conjuguons! </h1>
-            <div className={styles.questionContainer}>
-                Verbo: {capitalizeVerb(verb) ?? ''} <br />
-                {fixTenseName(verbTense) ?? ''}
 
-                <form onSubmit={handleSubmitAnswer}>
-                    {getSubjectName(subject)}
+            <div className={styles.titleContainer}>
+                <h1 className={styles.title}> Conjuguons! </h1>
+            </div>
+
+            <div className={styles.questionContainer}>
+                <div className={styles.questionPromptContainer}>
+                    Verbo: <br />
+                    Tempo:
+                </div>
+
+                <div className={styles.questionGeneratedContainer}>
+                    {capitalizeVerb(verb) ?? ''} <br />
+                    {fixTenseName(verbTense) ?? ''}
+                </div>
+
+
+
+                <form className={styles.submitForm} onSubmit={handleSubmitAnswer}>
+                    <span className={styles.subject}>
+                        {getSubjectName(subject)}
+                    </span>
+
                     <input
                         onChange={e => setAnswer(e.target.value)}
                         value={answer}
+                        className={styles.answer}
                     />
-                    <button type="submit">
+
+                    <button
+                        type="submit"
+                        className={styles.submitAnswer}
+                    >
                         Check
                     </button>
                 </form>
-                {status}
+
 
                 <button
                     type="button"
@@ -170,6 +191,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
                 >
                     Get New Verb
                 </button>
+
             </div>
 
         </main>

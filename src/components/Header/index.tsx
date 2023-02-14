@@ -9,7 +9,7 @@ export function Header() {
                 </nav>
                 
                 <nav className={styles.links}>
-                    <a href='http://www.google.com'>Github</a>
+                    <a href='http://www.google.com'>Settings</a>
                     <a href='http://www.google.com'>About</a>
                 </nav>
             </div>

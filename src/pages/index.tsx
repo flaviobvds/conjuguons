@@ -14,6 +14,7 @@ export default function Home() {
         verbTenses: ['PASSE_COMPOSE', 'PLUS_QUE_PARFAIT']
     }
 
+    const [lang, setLang] = useState('fr');
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
     function handleOpenSettingsModal() {
@@ -30,7 +31,7 @@ export default function Home() {
             </Head>
 
             <Header />
-            <QuestionContainer questionsettings={settings} />
+            <QuestionContainer questionsettings={settings} lang={lang}/>
             <SettingsModal
                 isOpen={isSettingsModalOpen}
                 onRequestClose={handleCloseSettingsModal}
