@@ -63,6 +63,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     const [subject, setSubject] = useState(0);
     const [verbTense, setVerbTense] = useState('');
     const [status, setStatus] = useState('');
+    const [correctAnswer, setCorrectAnswer] = useState('');
     const verbsDetectifs = [
         'grêler', 'neiger', 'barder', 'advenir', 'bruiner', 'dracher',
         "s'agir", 'venter', 'apparoir', 'pleuvoir', 'falloir'
@@ -108,9 +109,19 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
             gender: newSubject(subject).gender as 'M' | 'F' ?? undefined, // if subject is ELLE, set gender
             number: newSubject(subject).number as 'S' | 'P' ?? undefined, // if subject is ELLES, set gender and number
         })
-        answer === conjugation ? setStatus('correct') : setStatus('incorrect')
-        console.log(conjugation)
+        setCorrectAnswer(conjugation)
     }
+
+    useEffect(() => {
+        console.log(answer + ' / ' + correctAnswer)
+        if (answer !==  '') {
+            answer === correctAnswer ? setStatus('correct') : setStatus('incorrect')
+        }
+    }, [correctAnswer])
+
+    useEffect(() => {
+        console.log(status)
+    }, [status])
 
     function handleGetNewQuestion() {
         setVerb(getRandomVerb(questionsettings.verbs)) // this will also trigger getRandomSubject inside useEffect
@@ -172,7 +183,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                     <input
                         onChange={e => setAnswer(e.target.value)}
                         value={answer}
-                        className={styles.answer}
+                        className={`${styles.answer} ${status === 'correct' ? styles.correct : styles.incorrect }`}
                     />
 
                     <button

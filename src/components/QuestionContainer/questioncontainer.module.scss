@@ -50,7 +50,7 @@
     padding: 0.5rem;
     //background-color: pink;
     line-height: 2rem;
-    font-size: 1.5rem;
+    //font-size: 1.5rem;
     grid-area: qG;
 }
 
@@ -78,19 +78,37 @@
 .answer {
     grid-area: a;
     align-items: start;
+    border-bottom: solid 1px black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 1.5rem;
     //background-color: greenyellow;
+
+    &:focus {
+        outline: none;
+        border-bottom: solid 2px;
+    }
+}
+
+.correct {
+    border-bottom: solid 2px #3152e2;
+}
+
+.incorrect {
+    border-bottom: solid 2px red;
 }
 
 .submitAnswer {
     grid-area: cB;
-    font-size: 1.25rem;
+    //font-size: 1.25rem;
     padding: 0.25rem;
     //background-color: brown;
 }
 
 .getNewVerbButton {
     grid-area: nVB;
-    font-size: 1.25rem;
+    //font-size: 1.25rem;
     padding: 0.25rem;
     height: 1.75rem;
     width: 20rem;
