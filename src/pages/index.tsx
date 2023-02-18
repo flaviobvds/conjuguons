@@ -6,6 +6,7 @@ import { SettingsModal } from '@/components/SettingsModal';
 
 import styles from './home.module.scss'
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 export default function Home() {
     const settings = {
@@ -32,6 +33,7 @@ export default function Home() {
 
             <Header />
             <QuestionContainer questionsettings={settings} lang={lang}/>
+            <Footer/>
             <SettingsModal
                 isOpen={isSettingsModalOpen}
                 onRequestClose={handleCloseSettingsModal}
