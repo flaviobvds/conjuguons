@@ -7,10 +7,11 @@ import { SettingsModal } from '@/components/SettingsModal';
 import styles from './home.module.scss'
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { LanguageProvider } from '@/hooks/language';
 
 export default function Home() {
     const settings = {
-        subjects: [1,2,3,4,5,6,7],
+        subjects: [1, 2, 3, 4, 5, 6, 7],
         verbs: "top25verbs" as const,
         verbTenses: ['PASSE_COMPOSE', 'PLUS_QUE_PARFAIT']
     }
@@ -26,19 +27,19 @@ export default function Home() {
     }
 
     return (
-        <>
+        <LanguageProvider>
             <Head>
                 <title>Conjuguons!</title>
             </Head>
 
             <Header />
-            <QuestionContainer questionsettings={settings} lang={lang}/>
-            <Footer/>
+            <QuestionContainer questionsettings={settings} lang={lang} />
+            <Footer />
             <SettingsModal
                 isOpen={isSettingsModalOpen}
                 onRequestClose={handleCloseSettingsModal}
             />
 
-        </>
+        </LanguageProvider>
     )
 }
