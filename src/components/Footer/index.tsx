@@ -1,9 +1,13 @@
 import style from './footer.module.scss'
+import { useLanguage } from '@/hooks/language'
+import { translatedText } from '@/hooks/translatedText'
 
 export function Footer() {
+    const {language} = useLanguage();
+
     return(
         <div className={style.footer}>
-            This is an OpenSource project developed with ReactJS, TypeScript, NextJS and SASS.
+            {translatedText.footer[language as keyof typeof translatedText.settings]}
         </div>
     )
 }

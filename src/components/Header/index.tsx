@@ -1,6 +1,6 @@
 import styles from './header.module.scss'
 import { useLanguage } from '@/hooks/language'
-
+import { translatedText } from '@/hooks/translatedText';
 
 
 export function Header() {
@@ -25,8 +25,8 @@ export function Header() {
                 </div>
                 
                 <nav className={styles.links}>
-                    <a href='http://www.google.com'>Settings</a>
-                    <a href='http://www.google.com'>About</a>
+                    <a href='http://www.google.com'>{translatedText.settings[language as keyof typeof translatedText.settings]}</a>
+                    <a href='http://www.google.com'>{translatedText.about[language as keyof typeof translatedText.settings]}</a>
                 </nav>
             </div>
         </header>

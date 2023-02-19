@@ -3,6 +3,8 @@ import verblist from '../../verblist.json';
 const FrenchVerbs = require('french-verbs');
 const Lefff = require('french-verbs-lefff/dist/conjugations.json');
 import { VerbsInfo } from 'french-verbs-lefff';
+import { translatedText } from "@/hooks/translatedText";
+import { useLanguage } from "@/hooks/language";
 
 import styles from './questioncontainer.module.scss'
 import { Score } from "../Score";
@@ -59,6 +61,7 @@ function getConjugation(question: Question) {
 }
 
 export function QuestionContainer({ questionsettings, lang }: QuestionContainerProps) {
+    const { language } = useLanguage();
     const [answer, setAnswer] = useState('');
     const [verb, setVerb] = useState('');
     const [subject, setSubject] = useState(0);
@@ -168,7 +171,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                     <div className={styles.questionContainer}>
                         
                         <div className={styles.questionPromptContainer}>
-                            Verbo:
+                            {translatedText.verb[language as keyof typeof translatedText.settings]}
                         </div>
 
                         <div className={styles.questionGeneratedContainer}>
@@ -176,7 +179,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                         </div>
 
                         <div className={styles.questionPromptContainer}>
-                            Tempo:
+                            {translatedText.tense[language as keyof typeof translatedText.settings]}
                         </div>
 
                         <div className={styles.questionGeneratedContainer}>
@@ -199,7 +202,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                                     type="submit"
                                     className={styles.submitAnswerButton}
                                 >
-                                    Check
+                                    {translatedText.check[language as keyof typeof translatedText.settings]}
                                 </button>
                             </form>
                         </div>
@@ -211,7 +214,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                         onClick={handleGetNewQuestion}
                         className={styles.getNewVerbButton}
                     >
-                        New Verb
+                        {translatedText.newVerb[language as keyof typeof translatedText.settings]}
                     </button>
                 </div>
 

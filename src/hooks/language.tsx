@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { translatedText } from "./translatedText";
 
 interface LanguageProviderProps {
     children: ReactNode;
@@ -6,7 +7,7 @@ interface LanguageProviderProps {
 
 interface LanguageContextData {
     language: string,
-    changeLanguage: (newLang: string) => void;
+    changeLanguage: (newLang: string) => void,
 }
 
 const LanguageContext = createContext<LanguageContextData>({} as LanguageContextData)
@@ -25,7 +26,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     }, [language])
 
     return (
-        <LanguageContext.Provider value={{language, changeLanguage}}>
+        <LanguageContext.Provider value={{ language, changeLanguage }}>
             {children}
         </LanguageContext.Provider>
     )
