@@ -1,13 +1,16 @@
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, Fragment } from "react";
 import verblist from '../../verblist.json';
 const FrenchVerbs = require('french-verbs');
 const Lefff = require('french-verbs-lefff/dist/conjugations.json');
 import { VerbsInfo } from 'french-verbs-lefff';
+import { FaCheck, FaTimes } from 'react-icons/fa'
+
 import { translatedText } from "@/hooks/translatedText";
 import { useLanguage } from "@/hooks/language";
+import { Score } from "../Score";
 
 import styles from './questioncontainer.module.scss'
-import { Score } from "../Score";
+
 
 interface Question {
     verb: string,
@@ -66,7 +69,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     const [verb, setVerb] = useState('');
     const [subject, setSubject] = useState(0);
     const [verbTense, setVerbTense] = useState('');
-    const [status, setStatus] = useState('');
+    const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [correctAnswer, setCorrectAnswer] = useState('');
     const verbsDetectifs = [
         'grêler', 'neiger', 'barder', 'advenir', 'bruiner', 'dracher',
@@ -101,6 +104,12 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                 gender: aux == "ETRE" ? 'F' : 'M',
                 number: aux == "ETRE" ? 'P' : 'S',
             }
+            // if subject is NOUS (index 3) or VOUS (index 4), use plural if aux is ETRE
+            if (subject == 3 || 4) return {
+                subject,
+                gender: 'M',
+                number: aux == "ETRE" ? 'P' : 'S',
+            }
             return {
                 subject: subject
             }
@@ -117,21 +126,24 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     }
 
     useEffect(() => {
-        console.log(answer + ' / ' + correctAnswer)
-        if (answer !== '') {
-            answer === correctAnswer ? setStatus('correct') : setStatus('incorrect')
+        //console.log(answer + ' / ' + correctAnswer)
+        if (answer !== '' && correctAnswer != '') {
+            answer === correctAnswer ? setIsCorrect(true) : setIsCorrect(false)
+        } else {
+            setIsCorrect(null);
         }
     }, [correctAnswer])
 
     useEffect(() => {
-        console.log(status)
-    }, [status])
+        //console.log(isCorrect)
+    }, [isCorrect])
 
     function handleGetNewQuestion() {
         setVerb(getRandomVerb(questionsettings.verbs)) // this will also trigger getRandomSubject inside useEffect
         setVerbTense(getRandomVerbTense(questionsettings.verbTenses))
-        setStatus('')
+        setIsCorrect(null)
         setAnswer('')
+        setCorrectAnswer('')
     }
 
     function getSubjectName(subjectIndex: number) {
@@ -159,6 +171,18 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
         return verb.charAt(0).toUpperCase() + verb.slice(1);
     }
 
+    function getStyle(status: boolean | null) {
+        if (status === true) return styles.correct
+        if (status === false) return styles.incorrect
+        if (status === null) return ''
+    }
+
+    function getIcon(status: boolean | null) {
+        if (status === true) return <FaCheck color="green" />
+        if (status === false) return <FaTimes color="red" />
+        if (status === null) return ''
+    }
+
     return (
         <main className={styles.content}>
             <div className={styles.divider}>
@@ -169,7 +193,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                     </div>
 
                     <div className={styles.questionContainer}>
-                        
+
                         <div className={styles.questionPromptContainer}>
                             {translatedText.verb[language as keyof typeof translatedText.settings]}
                         </div>
@@ -195,7 +219,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                                 <input
                                     onChange={e => setAnswer(e.target.value)}
                                     value={answer}
-                                    className={`${styles.answer} ${status === 'correct' ? styles.correct : styles.incorrect}`}
+                                    className={`${styles.answer} ${getStyle(isCorrect)}`}
                                 />
 
                                 <button
@@ -207,6 +231,12 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                             </form>
                         </div>
 
+                        <div className={styles.correction}>
+                            <Fragment>
+                                {getIcon(isCorrect) ?? ''}
+                            </Fragment>
+                            {correctAnswer ?? ''}
+                        </div>
                     </div>
 
                     <button
