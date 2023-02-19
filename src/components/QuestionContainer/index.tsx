@@ -7,6 +7,7 @@ import { FaCheck, FaTimes } from 'react-icons/fa'
 
 import { translatedText } from "@/hooks/translatedText";
 import { useLanguage } from "@/hooks/language";
+import { useScore } from "@/hooks/score";
 import { Score } from "../Score";
 
 import styles from './questioncontainer.module.scss'
@@ -25,8 +26,7 @@ interface QuestionContainerProps {
         subjects: number[],
         verbs: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs',
         verbTenses: string[]
-    },
-    lang: string
+    }
 }
 
 function getRandomVerb(listType: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs') {
@@ -63,7 +63,8 @@ function getConjugation(question: Question) {
     return FrenchVerbs.getConjugation(Lefff as VerbsInfo, question.verb, question.tense, question.person)
 }
 
-export function QuestionContainer({ questionsettings, lang }: QuestionContainerProps) {
+export function QuestionContainer({ questionsettings }: QuestionContainerProps) {
+    const { changeScore } = useScore();
     const { language } = useLanguage();
     const [answer, setAnswer] = useState('');
     const [verb, setVerb] = useState('');
@@ -89,36 +90,38 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     function handleSubmitAnswer(event: FormEvent) {
         event.preventDefault();
 
-        function newSubject(subject: number) {
+        function newSubject(oldSubject: number) {
             const aux = getAuxiliary(verb)
-
+            
             // if subject is ELLE (index 6), consider it IL (index 2). Use female if aux is ETRE
-            if (subject == 6) return {
-                subject: 2,
+            if (oldSubject == 6) return {
+                newSubject: 2,
                 gender: aux == "ETRE" ? 'F' : 'M',
                 number: 'S'
             }
             // if subject is ELLES (index 7), consider it ILS (index 5). Use female & plural if aux is ETRE
-            if (subject == 7) return {
-                subject: 5,
+            if (oldSubject == 7) return {
+                newSubject: 5,
                 gender: aux == "ETRE" ? 'F' : 'M',
                 number: aux == "ETRE" ? 'P' : 'S',
             }
             // if subject is NOUS (index 3) or VOUS (index 4), use plural if aux is ETRE
-            if (subject == 3 || 4) return {
-                subject,
+            if (oldSubject >= 3 && oldSubject <= 5) return {
+                newSubject: subject,
                 gender: 'M',
                 number: aux == "ETRE" ? 'P' : 'S',
             }
             return {
-                subject: subject
+                newSubject: subject,
+                gender: 'M',
+                number: 'S'
             }
         }
 
         const conjugation = getConjugation({
             verb: verb,
             tense: verbTense,
-            person: newSubject(subject).subject,
+            person: newSubject(subject).newSubject,
             gender: newSubject(subject).gender as 'M' | 'F' ?? undefined, // if subject is ELLE, set gender
             number: newSubject(subject).number as 'S' | 'P' ?? undefined, // if subject is ELLES, set gender and number
         })
@@ -126,7 +129,6 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     }
 
     useEffect(() => {
-        //console.log(answer + ' / ' + correctAnswer)
         if (answer !== '' && correctAnswer != '') {
             answer === correctAnswer ? setIsCorrect(true) : setIsCorrect(false)
         } else {
@@ -135,7 +137,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     }, [correctAnswer])
 
     useEffect(() => {
-        //console.log(isCorrect)
+        if (isCorrect != null) changeScore(isCorrect)
     }, [isCorrect])
 
     function handleGetNewQuestion() {
@@ -147,7 +149,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     }
 
     function getSubjectName(subjectIndex: number) {
-        const subjects = ['Je', 'Tu', 'Il', 'Nous', 'Vous', 'Ils', 'Elle', 'Elles']
+        const subjects = ["Je / J'", 'Tu', 'Il', 'Nous', 'Vous', 'Ils', 'Elle', 'Elles']
         const subject = subjects[subjectIndex]
         return subject
     }

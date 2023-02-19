@@ -1,9 +1,16 @@
 import styles from './score.module.scss'
 import { useLanguage } from '@/hooks/language'
+import { useScore } from '@/hooks/score';
 import { translatedText } from '@/hooks/translatedText'
 
 export function Score() {
     const { language } = useLanguage();
+    const { score, resetScore } = useScore();
+
+    function calcPC(correct: number, questions: number) {
+        if (questions != 0) return Math.round((correct / questions) * 100)
+        return 0
+    }
 
     return (
         <div className={styles.rightContainer}>
@@ -15,34 +22,43 @@ export function Score() {
                 </div>
 
                 <div className={styles.scoreContainer}>
+
                     <div className={styles.heading}>
-                        {translatedText.questions[language as keyof typeof translatedText.settings]}
+                        {translatedText.questions[language as keyof typeof translatedText.questions]}
                     </div>
                     <div className={styles.qtty}>
-                        3
+                        {score.questions}
                     </div>
+
+
                     <div className={styles.heading}>
-                        {translatedText.correct[language as keyof typeof translatedText.settings]}
+                        {translatedText.correct[language as keyof typeof translatedText.correct]}
                     </div>
                     <div className={styles.qttyCorrect}>
-                        2
+                        {score.correct}
                     </div>
+
+
                     <div className={styles.heading}>
-                        {translatedText.incorrect[language as keyof typeof translatedText.settings]}
+                        {translatedText.incorrect[language as keyof typeof translatedText.incorrect]}
                     </div>
                     <div className={styles.qttyIncorrect}>
-                        1
+                        {score.incorrect}
                     </div>
+
+
+
                     <div className={styles.heading}>
                         %:
                     </div>
                     <div className={styles.qtty}>
-                        75%
+                        {`${calcPC(score.correct, score.questions)} %`}
                     </div>
                 </div>
 
                 <button
                     className={styles.resetButton}
+                    onClick={resetScore}
                 >
                     {translatedText.resetScore[language as keyof typeof translatedText.settings]}
                 </button>
