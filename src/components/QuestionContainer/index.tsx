@@ -5,6 +5,7 @@ const Lefff = require('french-verbs-lefff/dist/conjugations.json');
 import { VerbsInfo } from 'french-verbs-lefff';
 
 import styles from './questioncontainer.module.scss'
+import { Score } from "../Score";
 
 interface Question {
     verb: string,
@@ -114,7 +115,7 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
 
     useEffect(() => {
         console.log(answer + ' / ' + correctAnswer)
-        if (answer !==  '') {
+        if (answer !== '') {
             answer === correctAnswer ? setStatus('correct') : setStatus('incorrect')
         }
     }, [correctAnswer])
@@ -156,55 +157,61 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
     }
 
     return (
-        <main className={styles.contentContainer}>
+        <main className={styles.content}>
+            <div className={styles.divider}>
+                <div className={styles.leftContainer}>
 
-            <div className={styles.titleContainer}>
-                <h1 className={styles.title}> Conjuguons! </h1>
-            </div>
+                    <div className={styles.titleContainer}>
+                        <h1 className={styles.title}> Conjuguons! </h1>
+                    </div>
 
-            <div className={styles.questionContainer}>
-                <div className={styles.questionPromptContainer}>
-                    Verbo: <br />
-                    Tempo:
+                    <div className={styles.questionContainer}>
+                        <div className={styles.questionPromptContainer}>
+                            Verbo: <br />
+                            Tempo:
+                        </div>
+
+                        <div className={styles.questionGeneratedContainer}>
+                            {capitalizeVerb(verb) ?? ''} <br />
+                            {fixTenseName(verbTense) ?? ''}
+                        </div>
+
+
+
+                        <form className={styles.submitForm} onSubmit={handleSubmitAnswer}>
+                            <span className={styles.subject}>
+                                {getSubjectName(subject)}
+                            </span>
+
+                            <input
+                                onChange={e => setAnswer(e.target.value)}
+                                value={answer}
+                                className={`${styles.answer} ${status === 'correct' ? styles.correct : styles.incorrect}`}
+                            />
+
+                            <button
+                                type="submit"
+                                className={styles.submitAnswer}
+                            >
+                                Check
+                            </button>
+                        </form>
+
+
+                        <button
+                            type="button"
+                            onClick={handleGetNewQuestion}
+                            className={styles.getNewVerbButton}
+                        >
+                            Get New Verb
+                        </button>
+
+                    </div>
                 </div>
 
-                <div className={styles.questionGeneratedContainer}>
-                    {capitalizeVerb(verb) ?? ''} <br />
-                    {fixTenseName(verbTense) ?? ''}
-                </div>
 
-
-
-                <form className={styles.submitForm} onSubmit={handleSubmitAnswer}>
-                    <span className={styles.subject}>
-                        {getSubjectName(subject)}
-                    </span>
-
-                    <input
-                        onChange={e => setAnswer(e.target.value)}
-                        value={answer}
-                        className={`${styles.answer} ${status === 'correct' ? styles.correct : styles.incorrect }`}
-                    />
-
-                    <button
-                        type="submit"
-                        className={styles.submitAnswer}
-                    >
-                        Check
-                    </button>
-                </form>
-
-
-                <button
-                    type="button"
-                    onClick={handleGetNewQuestion}
-                    className={styles.getNewVerbButton}
-                >
-                    Get New Verb
-                </button>
-
+                <Score />
             </div>
-
         </main>
     );
 }

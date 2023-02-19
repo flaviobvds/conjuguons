@@ -1,31 +1,58 @@
-.contentContainer {
+.content {
+    width: 100%;
+    height: calc(100vh - 5rem - 3rem); //total viewport height minus header and footer
+    //background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.divider {
+    width: 100%;
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    //justify-content: center;
+    //align-content: center;
+    //background-color: purple;
+    
+}
+
+.leftContainer {
+    //width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    //margin-top: 1rem;
     padding: 0 2rem;
-    //height: 100%;
-    height: calc(100vh - 5rem - 3rem);
-    align-content: center;
-    //border: 1px solid blue;
     //background-color: red;
     display: flex;
     flex-direction: column;
+    //align-content: flex-end;
+    align-items: flex-end;
+    //justify-items: center;
+    justify-self: right;
+
+    justify-content: center;
+
     //display: grid;
     //grid-template-rows: 1fr 3fr;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
+    //border: 1px solid blue;
+    //height: 100%;
+    //margin-top: 1rem;
     //border: 1px solid #172f9c;
 }
 
 .titleContainer {
     width: 100%;
-    //background-color: green;
     color: #3152e2;
-    font-size: 2rem;
     text-align: center;
-    //margin-top: 1.5rem;
     margin-bottom: 2rem;
+    //background-color: green;
+    //margin-top: 1.5rem;
+
+    h1 { 
+        font-size: 4rem;
+    }
 }
 
 .questionContainer {
@@ -33,7 +60,7 @@
     width: 500px;
     height: 200px;
     line-height: 2rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     //background-color: yellow;
     padding: 5px;
     display: grid;
@@ -44,20 +71,20 @@
 }
 
 .questionPromptContainer {
-    padding: 0.5rem;
+    padding: 0.5rem; 
+    grid-area: qP;
     //background-color: green;
     //line-height: 2rem;
     //font-size: 1.5rem;
-    grid-area: qP;
     //display: flex;
 }
 
 .questionGeneratedContainer {
     padding: 0.5rem;
-    //background-color: pink;
     line-height: 2rem;
-    //font-size: 1.5rem;
     grid-area: qG;
+    //background-color: pink;
+    //font-size: 1.5rem;
 }
 
 
@@ -88,7 +115,7 @@
     border-top: none;
     border-left: none;
     border-right: none;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     background-color: whitesmoke;
     //background-color: greenyellow;
 
@@ -115,10 +142,19 @@
 
 .getNewVerbButton {
     grid-area: nVB;
-    //font-size: 1.25rem;
-    padding: 0.25rem;
-    height: 1.75rem;
-    width: 20rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem 2.25rem;
+    font-size: 1.25rem;
+    background-color: #3152e2;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    //height: 1.75rem;
+    //width: 20rem;
     //background-color: darkmagenta;
     justify-self: center;
+
+    &:hover {
+        filter: opacity(0.8);
+    }
 }
