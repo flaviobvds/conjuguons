@@ -166,47 +166,53 @@ export function QuestionContainer({ questionsettings, lang }: QuestionContainerP
                     </div>
 
                     <div className={styles.questionContainer}>
+                        
                         <div className={styles.questionPromptContainer}>
-                            Verbo: <br />
-                            Tempo:
+                            Verbo:
                         </div>
 
                         <div className={styles.questionGeneratedContainer}>
                             {capitalizeVerb(verb) ?? ''} <br />
+                        </div>
+
+                        <div className={styles.questionPromptContainer}>
+                            Tempo:
+                        </div>
+
+                        <div className={styles.questionGeneratedContainer}>
                             {fixTenseName(verbTense) ?? ''}
                         </div>
 
+                        <div className={styles.answerContainer}>
+                            <form className={styles.submitForm} onSubmit={handleSubmitAnswer}>
+                                <span className={styles.subject}>
+                                    {getSubjectName(subject)}
+                                </span>
 
+                                <input
+                                    onChange={e => setAnswer(e.target.value)}
+                                    value={answer}
+                                    className={`${styles.answer} ${status === 'correct' ? styles.correct : styles.incorrect}`}
+                                />
 
-                        <form className={styles.submitForm} onSubmit={handleSubmitAnswer}>
-                            <span className={styles.subject}>
-                                {getSubjectName(subject)}
-                            </span>
-
-                            <input
-                                onChange={e => setAnswer(e.target.value)}
-                                value={answer}
-                                className={`${styles.answer} ${status === 'correct' ? styles.correct : styles.incorrect}`}
-                            />
-
-                            <button
-                                type="submit"
-                                className={styles.submitAnswer}
-                            >
-                                Check
-                            </button>
-                        </form>
-
-
-                        <button
-                            type="button"
-                            onClick={handleGetNewQuestion}
-                            className={styles.getNewVerbButton}
-                        >
-                            Get New Verb
-                        </button>
+                                <button
+                                    type="submit"
+                                    className={styles.submitAnswerButton}
+                                >
+                                    Check
+                                </button>
+                            </form>
+                        </div>
 
                     </div>
+
+                    <button
+                        type="button"
+                        onClick={handleGetNewQuestion}
+                        className={styles.getNewVerbButton}
+                    >
+                        New Verb
+                    </button>
                 </div>
 
 

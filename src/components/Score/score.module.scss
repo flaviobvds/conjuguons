@@ -77,3 +77,9 @@
         filter: opacity(0.8);
     }
 }
+
+@media (max-width: 720px) {
+    .rightContainer{
+        margin-top: 3rem;
+    }
+}

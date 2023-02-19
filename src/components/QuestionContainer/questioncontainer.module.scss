@@ -5,7 +5,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    align-content: center;
 }
 
 .divider {
@@ -13,42 +12,26 @@
     max-width: 1120px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    //justify-content: center;
-    //align-content: center;
     //background-color: purple;
-    
 }
 
 .leftContainer {
-    //width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    padding: 0 2rem;
+    //width: 80%;
+    //padding: 0 2rem;
     //background-color: red;
     display: flex;
     flex-direction: column;
-    //align-content: flex-end;
-    align-items: flex-end;
-    //justify-items: center;
+    align-items: center;
     justify-self: right;
-
     justify-content: center;
-
-    //display: grid;
-    //grid-template-rows: 1fr 3fr;
-    //border: 1px solid blue;
-    //height: 100%;
-    //margin-top: 1rem;
-    //border: 1px solid #172f9c;
 }
 
 .titleContainer {
     width: 100%;
     color: #3152e2;
     text-align: center;
-    margin-bottom: 2rem;
-    //background-color: green;
-    //margin-top: 1.5rem;
 
     h1 { 
         font-size: 4rem;
@@ -57,59 +40,37 @@
 
 .questionContainer {
     margin-top: 2rem;
-    width: 500px;
-    height: 200px;
+    width: 70%;
     line-height: 2rem;
     font-size: 1.25rem;
     //background-color: yellow;
-    padding: 5px;
+    //padding: 1rem;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 2fr 1fr 1fr;
-    grid-template-areas: "qP qG qG"   "f f f"  "nVB nVB nVB";
-    align-items: center;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 2fr;
 }
 
-.questionPromptContainer {
-    padding: 0.5rem; 
-    grid-area: qP;
-    //background-color: green;
-    //line-height: 2rem;
-    //font-size: 1.5rem;
-    //display: flex;
+.answerContainer {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    //background-color: grey;
+    padding-top: 1.75rem;
 }
-
-.questionGeneratedContainer {
-    padding: 0.5rem;
-    line-height: 2rem;
-    grid-area: qG;
-    //background-color: pink;
-    //font-size: 1.5rem;
-}
-
 
 .submitForm {
-    padding: 0.5rem;
-    grid-area: f;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "s a cB";
-    //background-color: aqua;
-
+    grid-template-columns: 1fr 4fr 1fr;
+    //background-color: blue;
+    
     * {
-        margin: 1rem;
+        display: flex;
     }
-}
-
-.subject {
-    grid-area: s;
-    text-align: end;
-    //padding-right: 1rem;
-    //background-color: purple;
+    
 }
 
 .answer {
-    grid-area: a;
+    //grid-area: aC;
+    width: 90%;
     align-items: start;
     border-bottom: solid 1px black;
     border-top: none;
@@ -125,6 +86,7 @@
     }
 }
 
+
 .correct {
     border-bottom: solid 2px #3152e2;
 }
@@ -133,28 +95,36 @@
     border-bottom: solid 2px red;
 }
 
-.submitAnswer {
-    grid-area: cB;
-    //font-size: 1.25rem;
-    padding: 0.25rem;
-    //background-color: brown;
-}
-
-.getNewVerbButton {
-    grid-area: nVB;
-    margin-top: 1.5rem;
-    padding: 0.5rem 2.25rem;
+.submitAnswerButton {
+    padding: 0.5rem 1.25rem;
     font-size: 1.25rem;
     background-color: #3152e2;
     color: white;
     border: 1px solid white;
     border-radius: 10px;
-    //height: 1.75rem;
-    //width: 20rem;
-    //background-color: darkmagenta;
-    justify-self: center;
 
     &:hover {
         filter: opacity(0.8);
+    }
+}
+
+.getNewVerbButton {
+    margin-top: 2.5rem;
+    padding: 0.5rem 2.5rem;
+    font-size: 1.25rem;
+    background-color: #3152e2;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+
+    &:hover {
+        filter: opacity(0.8);
+    }
+}
+
+@media (max-width: 720px) {
+    .divider {
+        display: flex;
+        flex-direction: column;
     }
 }
