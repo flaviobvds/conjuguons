@@ -6,7 +6,7 @@ import { SettingsModal } from '@/components/SettingsModal';
 import { AboutModal } from '@/components/AboutModal';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { LanguageProvider } from '@/hooks/language';
+import { LanguageProvider, useLanguage } from '@/hooks/language';
 import { ScoreProvider } from '@/hooks/score';
 
 import styles from './home.module.scss'
