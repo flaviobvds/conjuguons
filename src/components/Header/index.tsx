@@ -2,8 +2,14 @@ import styles from './header.module.scss'
 import { useLanguage } from '@/hooks/language'
 import { translatedText } from '@/hooks/translatedText';
 
+interface HeaderProps {
+    isAboutOpen: boolean,
+    isSettingsOpen: boolean,
+    handleOpenAbout: () => void,
+    handleOpenSettings: () => void
+}
 
-export function Header() {
+export function Header({isAboutOpen, handleOpenAbout, isSettingsOpen, handleOpenSettings}: HeaderProps) {
 
     const { language, changeLanguage } = useLanguage();
 
@@ -23,10 +29,15 @@ export function Header() {
                         <img src='./images/br-flag.svg' alt="" />
                     </button>
                 </div>
-                
+
                 <nav className={styles.links}>
-                    <a href='http://www.google.com'>{translatedText.settings[language as keyof typeof translatedText.settings]}</a>
-                    <a href='http://www.google.com'>{translatedText.about[language as keyof typeof translatedText.settings]}</a>
+                    <a onClick={handleOpenSettings}>
+                        {translatedText.settings[language as keyof typeof translatedText.settings]}
+                    </a>
+                    
+                    <a onClick={handleOpenAbout}>
+                        {translatedText.about[language as keyof typeof translatedText.settings]}
+                    </a>
                 </nav>
             </div>
         </header>

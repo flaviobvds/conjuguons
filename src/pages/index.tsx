@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useState } from "react";
 
 import { SettingsModal } from '@/components/SettingsModal';
+import { AboutModal } from '@/components/AboutModal';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { LanguageProvider } from '@/hooks/language';
@@ -19,12 +20,20 @@ export default function Home() {
     }
 
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+    const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
     function handleOpenSettingsModal() {
         setIsSettingsModalOpen(true);
     }
     function handleCloseSettingsModal() {
         setIsSettingsModalOpen(false);
+    }
+
+    function handleOpenAboutModal() {
+        setIsAboutModalOpen(true);
+    }
+    function handleCloseAboutModal() {
+        setIsAboutModalOpen(false);
     }
 
     return (
@@ -35,12 +44,21 @@ export default function Home() {
                     <title>Conjuguons!</title>
                 </Head>
 
-                <Header />
+                <Header 
+                    isAboutOpen={isAboutModalOpen}
+                    isSettingsOpen={isSettingsModalOpen}
+                    handleOpenAbout={handleOpenAboutModal}
+                    handleOpenSettings={handleOpenSettingsModal}
+                />
                 <QuestionContainer questionsettings={settings} />
                 <Footer />
                 <SettingsModal
                     isOpen={isSettingsModalOpen}
                     onRequestClose={handleCloseSettingsModal}
+                />
+                <AboutModal
+                    isOpen={isAboutModalOpen}
+                    onRequestClose={handleCloseAboutModal}
                 />
 
             </ScoreProvider>
