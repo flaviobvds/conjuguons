@@ -83,16 +83,14 @@
         outline: none;
         border-bottom: solid 2px;
     }
-}
 
+    &.correct {
+        border-bottom: solid 3px green;
+    }
 
-.correct {
-    //border-bottom: solid 2px #3152e2;
-    border-bottom: solid 3px green;
-}
-
-.incorrect {
-    border-bottom: solid 3px red;
+    &.incorrect {
+        border-bottom: solid 3px red;
+    }
 }
 
 .submitAnswerButton {

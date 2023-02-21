@@ -77,6 +77,10 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
         "s'agir", 'venter', 'apparoir', 'pleuvoir', 'falloir'
     ]
 
+    useEffect(() => {
+        document.getElementById("answerInput")!.focus();
+    }, [])
+
     // if verb is detectif, always use subject IL (index 2), if not, get random subject
     useEffect(() => {
         if (verbsDetectifs.includes(verb)) {
@@ -126,6 +130,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
             number: newSubject(subject).number as 'S' | 'P' ?? undefined, // if subject is ELLES, set gender and number
         })
         setCorrectAnswer(conjugation)
+        document.getElementById("getNewVerb")!.focus();
     }
 
     useEffect(() => {
@@ -146,6 +151,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
         setIsCorrect(null)
         setAnswer('')
         setCorrectAnswer('')
+        document.getElementById("answerInput")!.focus();
     }
 
     function getSubjectName(subjectIndex: number) {
@@ -222,6 +228,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
                                     onChange={e => setAnswer(e.target.value)}
                                     value={answer}
                                     className={`${styles.answer} ${getStyle(isCorrect)}`}
+                                    id="answerInput"
                                 />
 
                                 <button
@@ -245,6 +252,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
                         type="button"
                         onClick={handleGetNewQuestion}
                         className={styles.getNewVerbButton}
+                        id="getNewVerb"
                     >
                         {translatedText.newVerb[language as keyof typeof translatedText.settings]}
                     </button>

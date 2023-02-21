@@ -49,7 +49,7 @@ export function Score() {
 
 
                     <div className={styles.heading}>
-                        %:
+                        
                     </div>
                     <div className={styles.qtty}>
                         {`${calcPC(score.correct, score.questions)} %`}

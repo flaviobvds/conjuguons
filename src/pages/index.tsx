@@ -11,13 +11,19 @@ import { ScoreProvider } from '@/hooks/score';
 
 import styles from './home.module.scss'
 
+interface Settings {
+    subjects: number[],
+    verbs: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs',
+    verbTenses: string[]
+}
 
 export default function Home() {
-    const settings = {
+
+    const [settings, setSettings] = useState<Settings>({
         subjects: [0,1,2,3,4,5,6,7],
         verbs: "top25verbs" as const,
-        verbTenses: ['PASSE_COMPOSE']
-    }
+        verbTenses: ['PRESENT', 'FUTUR', 'IMPARFAIT']
+    })
 
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
