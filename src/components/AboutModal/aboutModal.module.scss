@@ -21,7 +21,11 @@
     p {
         margin-top: 1.5rem;
         font-size: 1rem;
-        text-align: justify;
+        text-align: center;
+    }
+
+    &:focus {
+        outline: none;
     }
 }
 
