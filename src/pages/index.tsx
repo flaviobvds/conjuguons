@@ -11,7 +11,7 @@ import { ScoreProvider } from '@/hooks/score';
 
 import styles from './home.module.scss'
 
-interface Settings {
+export interface Settings {
     subjects: number[],
     verbs: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs',
     verbTenses: string[]
@@ -61,6 +61,8 @@ export default function Home() {
                 <SettingsModal
                     isOpen={isSettingsModalOpen}
                     onRequestClose={handleCloseSettingsModal}
+                    settings={settings}
+                    setSettings={setSettings}
                 />
                 <AboutModal
                     isOpen={isAboutModalOpen}

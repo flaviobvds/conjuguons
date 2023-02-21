@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
 import { FaTimes as CloseButton, FaGithub, FaLinkedin } from 'react-icons/fa'
+
 import { translatedText } from '@/hooks/translatedText';
 import { useLanguage } from "@/hooks/language";
 

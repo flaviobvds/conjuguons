@@ -17,8 +17,8 @@ interface Question {
     verb: string,
     tense: string,
     person: number,
-    gender?: 'M' | 'F'
-    number?: 'P' | 'S'
+    gender: 'M' | 'F'
+    number: 'P' | 'S'
 }
 
 interface QuestionContainerProps {
@@ -156,8 +156,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
 
     function getSubjectName(subjectIndex: number) {
         const subjects = ["Je / J'", 'Tu', 'Il', 'Nous', 'Vous', 'Ils', 'Elle', 'Elles']
-        const subject = subjects[subjectIndex]
-        return subject
+        return subjects[subjectIndex]
     }
 
     function fixTenseName(tense: string) {
