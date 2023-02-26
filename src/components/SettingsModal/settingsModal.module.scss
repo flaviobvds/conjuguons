@@ -12,11 +12,15 @@
 
 .modalContent {
     background: whitesmoke;
-    width: 90%;
-    max-width: 648px;
-    padding: 3rem;
+    width: 95%;
+    max-width: 684px;
+    padding: 3rem 2rem 2rem 2rem;
     position: relative;
     border-radius: 0.25rem;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .modalClose {
@@ -41,23 +45,17 @@
     background-color: #3152e2;
     color: white;
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .settingsContainer {
-    /*
-    display: flex;
-    justify-content: space-between;
-    */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1.3fr;
     width: 100%;
-    
-    
 }
 
-.selectionContainer{
-    padding: 0 0.5rem;
+.selectionContainer {
+    padding: 0 0.25rem;
     display: flex;
     flex-direction: column;
 
@@ -66,6 +64,53 @@
         text-align: center;
         color: white;
         background-color: #3e61ffe1;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    h3 {
+        text-align: center;
+        margin-bottom: 0.25rem;
+    }
+
+}
+
+.tenseCategory {
+    &:not(:first-of-type) {
+        margin-top: 1rem;
+    }
+}
+
+.radioOptionsWrapper {
+    display: flex;
+    font-size: 1.125rem;
+}
+
+.radioButton {
+    background-color: green;
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0.25rem 0.5rem;
+}
+
+.label{
+    margin-top: 0.25rem;
+}
+
+.saveSettingsButton {
+    display: flex;
+    justify-content: center;
+
+    button {
+        margin-top: 2.5rem;
+        padding: 0.5rem 2.5rem;
+        font-size: 1.25rem;
+        background-color: #3152e2;
+        color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+    
+        &:hover {
+            filter: opacity(0.8);
+        }
     }
 }
