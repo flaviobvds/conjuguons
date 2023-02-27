@@ -1,15 +1,14 @@
-import { Settings } from '@/pages';
+import { useSettings } from '@/hooks/settings';
 
 import styles from './optionWithCheckBox.module.scss'
 
 interface OptionWithCheckBoxProps {
     option: string;
     arrItem: string;
-    settings: Settings;
-    setSettings: (settings: Settings) => void;
 }
 
-export function TenseOptionWithCheckBox({option, arrItem, settings, setSettings}: OptionWithCheckBoxProps) {    
+export function TenseOptionWithCheckBox({option, arrItem}: OptionWithCheckBoxProps) {    
+    const {settings, changeSettings} = useSettings();
     const value = settings.verbTenses.includes(arrItem)
 
     return (
@@ -22,7 +21,7 @@ export function TenseOptionWithCheckBox({option, arrItem, settings, setSettings}
                     if (e.target.checked === true) {
                         
                         // if a new item gets checked, add it to the array
-                        setSettings({
+                        changeSettings({
                             ...settings,
                             verbTenses: [arrItem, ...settings.verbTenses]
                         })
@@ -30,7 +29,7 @@ export function TenseOptionWithCheckBox({option, arrItem, settings, setSettings}
                     } else {
                         
                         // if an item that was checked gets unchecked, remove it from the array
-                        setSettings({
+                        changeSettings({
                             ...settings,
                             verbTenses: settings.verbTenses.filter((verbTense) => {return verbTense !== arrItem})
                         })

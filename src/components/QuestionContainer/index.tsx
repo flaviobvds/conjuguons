@@ -8,6 +8,7 @@ import { FaCheck, FaTimes } from 'react-icons/fa'
 import { translatedText } from "@/hooks/translatedText";
 import { useLanguage } from "@/hooks/language";
 import { useScore } from "@/hooks/score";
+import { useSettings } from "@/hooks/settings";
 import { Score } from "../Score";
 
 import styles from './questioncontainer.module.scss'
@@ -19,14 +20,6 @@ interface Question {
     person: number,
     gender: 'M' | 'F'
     number: 'P' | 'S'
-}
-
-interface QuestionContainerProps {
-    questionsettings: {
-        subjects: number[],
-        verbs: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs',
-        verbTenses: string[]
-    }
 }
 
 function getRandomVerb(listType: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs') {
@@ -63,7 +56,21 @@ function getConjugation(question: Question) {
     return FrenchVerbs.getConjugation(Lefff as VerbsInfo, question.verb, question.tense, question.person)
 }
 
-export function QuestionContainer({ questionsettings }: QuestionContainerProps) {
+export const subjects = ['Je', 'Tu', 'Il', 'Nous', 'Vous', 'Ils', 'Elle', 'Elles']
+export const tenses = {
+    'PRESENT': 'Indicatif - Présent',
+    'FUTUR': 'Indicatif - Futur Simple',
+    'IMPARFAIT': 'Indicatif - Imparfait',
+    'PASSE_SIMPLE': 'Indicatif - Passé Simple',
+    'CONDITIONNEL_PRESENT': 'Conditionnel - Présent',
+    'SUBJONCTIF_PRESENT': 'Subjonctif - Présent',
+    'SUBJONCTIF_IMPARFAIT': 'Subjonctif - Imparfait',
+    'PASSE_COMPOSE': 'Indicatif - Passé Composé',
+    'PLUS_QUE_PARFAIT': 'Indicatif - Plus que Parfait'
+}
+
+export function QuestionContainer() {
+    const {settings, changeSettings} = useSettings();
     const { changeScore } = useScore();
     const { language } = useLanguage();
     const [answer, setAnswer] = useState('');
@@ -87,7 +94,7 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
             console.log('detectif')
             setSubject(2)
         } else {
-            setSubject(getRandomSubject(questionsettings.subjects))
+            setSubject(getRandomSubject(settings.subjects))
         }
     }, [verb])
 
@@ -146,8 +153,8 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
     }, [isCorrect])
 
     function handleGetNewQuestion() {
-        setVerb(getRandomVerb(questionsettings.verbs)) // this will also trigger getRandomSubject inside useEffect
-        setVerbTense(getRandomVerbTense(questionsettings.verbTenses))
+        setVerb(getRandomVerb(settings.verbs)) // this will also trigger getRandomSubject inside useEffect
+        setVerbTense(getRandomVerbTense(settings.verbTenses))
         setIsCorrect(null)
         setAnswer('')
         setCorrectAnswer('')
@@ -155,22 +162,10 @@ export function QuestionContainer({ questionsettings }: QuestionContainerProps) 
     }
 
     function getSubjectName(subjectIndex: number) {
-        const subjects = ["Je / J'", 'Tu', 'Il', 'Nous', 'Vous', 'Ils', 'Elle', 'Elles']
         return subjects[subjectIndex]
     }
 
     function fixTenseName(tense: string) {
-        const tenses = {
-            'PRESENT': 'Indicatif - Présent',
-            'FUTUR': 'Indicatif - Futur Simple',
-            'IMPARFAIT': 'Indicatif - Imparfait',
-            'PASSE_SIMPLE': 'Indicatif - Passé Simple',
-            'CONDITIONNEL_PRESENT': 'Conditionnel - Présent',
-            'SUBJONCTIF_PRESENT': 'Subjonctif - Présent',
-            'SUBJONCTIF_IMPARFAIT': 'Subjonctif - Imparfait',
-            'PASSE_COMPOSE': 'Indicatif - Passé Composé',
-            'PLUS_QUE_PARFAIT': 'Indicatif - Plus que Parfait'
-        }
         return tenses[tense as keyof typeof tenses];
     }
 

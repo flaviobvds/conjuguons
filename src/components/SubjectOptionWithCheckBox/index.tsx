@@ -1,15 +1,15 @@
-import { Settings } from '@/pages';
+import { useSettings } from '@/hooks/settings';
+import { subjects } from '../QuestionContainer';
 
 import styles from './optionWithCheckBox.module.scss'
 
 interface OptionWithCheckBoxProps {
     option: string;
-    arrItem: number;
-    settings: Settings;
-    setSettings: (settings: Settings) => void;
 }
 
-export function SubjectOptionWithCheckBox({option, arrItem, settings, setSettings}: OptionWithCheckBoxProps) {    
+export function SubjectOptionWithCheckBox({option}: OptionWithCheckBoxProps) {    
+    const {settings, changeSettings} = useSettings();
+    const arrItem = subjects.findIndex((subject) => {return subject === option})
     const value = settings.subjects.includes(arrItem)
 
     return (
@@ -22,7 +22,7 @@ export function SubjectOptionWithCheckBox({option, arrItem, settings, setSetting
                     if (e.target.checked === true) {
                         
                         // if a new item gets checked, add it to the array
-                        setSettings({
+                        changeSettings({
                             ...settings,
                             subjects: [arrItem, ...settings.subjects]
                         })
@@ -30,7 +30,7 @@ export function SubjectOptionWithCheckBox({option, arrItem, settings, setSetting
                     } else {
                         
                         // if an item that was checked gets unchecked, remove it from the array
-                        setSettings({
+                        changeSettings({
                             ...settings,
                             subjects: settings.subjects.filter((subject) => {return subject !== arrItem})
                         })

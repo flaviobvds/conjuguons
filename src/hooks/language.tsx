@@ -21,10 +21,6 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
         setLanguage(newLanguage)
     }
 
-    useEffect(() => {
-        console.log(language)
-    }, [language])
-
     return (
         <LanguageContext.Provider value={{ language, changeLanguage }}>
             {children}
