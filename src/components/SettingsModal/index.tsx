@@ -5,10 +5,12 @@ import { FaTimes as CloseButton } from 'react-icons/fa'
 import { translatedText } from '@/hooks/translatedText';
 import { useLanguage } from "@/hooks/language";
 import { useSettings } from '@/hooks/settings';
+
 import { SubjectOptionWithCheckBox } from '../SubjectOptionWithCheckBox';
+import { TenseOptionWithCheckBox } from '../TenseOptionWithCheckBox';
 
 import styles from './settingsModal.module.scss'
-import { TenseOptionWithCheckBox } from '../TenseOptionWithCheckBox';
+import { VerbOptionsWithRadio } from '../VerbOptionsWithRadio';
 
 
 interface SettingsModalProps {
@@ -36,7 +38,7 @@ export function SettingsModal({ isOpen, onRequestClose }: SettingsModalProps) {
             <div className={styles.settingsContainer}>
                 <div className={styles.selectionContainer}>
                     <h2 className={styles.subTitle}>
-                        Subjects
+                        {translatedText.subjects[language as keyof typeof translatedText.subjects]}
                     </h2>
 
                     <SubjectOptionWithCheckBox option='Je' />
@@ -51,7 +53,7 @@ export function SettingsModal({ isOpen, onRequestClose }: SettingsModalProps) {
 
                 <div className={styles.selectionContainer}>
                     <h2 className={styles.subTitle}>
-                        Verb Tenses
+                        {translatedText.verbTenses[language as keyof typeof translatedText.verbTenses]}
                     </h2>
 
                     <h3 className={styles.tenseCategory}>
@@ -80,33 +82,17 @@ export function SettingsModal({ isOpen, onRequestClose }: SettingsModalProps) {
 
                 <div className={styles.selectionContainer}>
                     <h2 className={styles.subTitle}>
-                        Verbs
+                        {translatedText.verbs[language as keyof typeof translatedText.verbs]}
                     </h2>
 
-                    <div className={styles.radioOptionsWrapper}>
-                        <input type="radio" name='verbs' value={'top25verbs'} className={styles.radioButton} />
-                        <label className={styles.label}>Top 25 Verbs</label>
-                    </div>
-
-                    <div className={styles.radioOptionsWrapper}>
-                        <input type="radio" name='verbs' value={'top50verbs'} className={styles.radioButton} />
-                        <label className={styles.label}>Top 50 Verbs</label>
-                    </div>
-
-                    <div className={styles.radioOptionsWrapper}>
-                        <input type="radio" name='verbs' value={'top100verbs'} className={styles.radioButton} />
-                        <label className={styles.label}>Top 100 Verbs</label>
-                    </div>
-
-                    <div className={styles.radioOptionsWrapper}>
-                        <input type="radio" name='verbs' value={'top50verbs'} className={styles.radioButton} />
-                        <label className={styles.label}>All Verbs</label>
-                    </div>
+                    <VerbOptionsWithRadio />
 
                 </div>
             </div>
             <div className={styles.saveSettingsButton}>
-                <button>Save</button>
+                <button>
+                    {translatedText.save[language as keyof typeof translatedText.save]}
+                </button>
             </div>
 
         </Modal>

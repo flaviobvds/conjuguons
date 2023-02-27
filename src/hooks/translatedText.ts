@@ -73,5 +73,45 @@ export const translatedText = {
         fr: "N'hésitez pas à le partager avec tout le monde et à consulter également mon portfolio GitHub et ma page LinkedIn.",
         en: 'Feel free to share it with everyone and also check out my GitHub portfolio and my LinkedIn page.',
         br: 'Sinta-se à vontade para compartilhá-lo com todos e também confira meu portfólio do GitHub e minha página do LinkedIn.'
+    },
+    subjects: {
+        fr: 'Sujets',
+        en: 'Subjects',
+        br: 'Sujeitos',
+    },
+    verbTenses: {
+        fr: 'Temps Verbaux',
+        en: 'Verb Tenses',
+        br: 'Tempos Verbais',
+    },
+    verbs: {
+        fr: 'Verbes',
+        en: 'Verbs',
+        br: 'Verbos',
+    },
+    top25verbs: {
+        fr: 'Top 25 Verbes',
+        en: 'Top 25 Verbs',
+        br: 'Top 25 Verbos',
+    },
+    top50verbs: {
+        fr: 'Top 50 Verbes',
+        en: 'Top 50 Verbs',
+        br: 'Top 50 Verbos',
+    },
+    top100verbs: {
+        fr: 'Top 100 Verbes',
+        en: 'Top 100 Verbs',
+        br: 'Top 100 Verbos',
+    },
+    allverbs: {
+        fr: 'Tous les Verbes',
+        en: 'All Verbs',
+        br: 'Todos os Verbos',
+    },
+    save: {
+        fr: 'Enregistrer',
+        en: 'Save',
+        br: 'Salvar'
     }
 }

@@ -70,15 +70,17 @@ export const tenses = {
 }
 
 export function QuestionContainer() {
-    const {settings, changeSettings} = useSettings();
+    const {settings} = useSettings();
     const { changeScore } = useScore();
     const { language } = useLanguage();
+
     const [answer, setAnswer] = useState('');
     const [verb, setVerb] = useState('');
     const [subject, setSubject] = useState(0);
     const [verbTense, setVerbTense] = useState('');
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [correctAnswer, setCorrectAnswer] = useState('');
+    
     const verbsDetectifs = [
         'grêler', 'neiger', 'barder', 'advenir', 'bruiner', 'dracher',
         "s'agir", 'venter', 'apparoir', 'pleuvoir', 'falloir'
@@ -116,7 +118,7 @@ export function QuestionContainer() {
                 gender: aux == "ETRE" ? 'F' : 'M',
                 number: aux == "ETRE" ? 'P' : 'S',
             }
-            // if subject is NOUS (index 3) or VOUS (index 4), use plural if aux is ETRE
+            // if subject is NOUS, VOUS or ILS, use plural if aux is ETRE
             if (oldSubject >= 3 && oldSubject <= 5) return {
                 newSubject: subject,
                 gender: 'M',
@@ -133,8 +135,8 @@ export function QuestionContainer() {
             verb: verb,
             tense: verbTense,
             person: newSubject(subject).newSubject,
-            gender: newSubject(subject).gender as 'M' | 'F' ?? undefined, // if subject is ELLE, set gender
-            number: newSubject(subject).number as 'S' | 'P' ?? undefined, // if subject is ELLES, set gender and number
+            gender: newSubject(subject).gender as 'M' | 'F' ?? undefined, 
+            number: newSubject(subject).number as 'S' | 'P' ?? undefined,
         })
         setCorrectAnswer(conjugation)
         document.getElementById("getNewVerb")!.focus();
@@ -251,7 +253,6 @@ export function QuestionContainer() {
                         {translatedText.newVerb[language as keyof typeof translatedText.settings]}
                     </button>
                 </div>
-
 
                 <Score />
             </div>
