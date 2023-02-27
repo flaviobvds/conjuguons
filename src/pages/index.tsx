@@ -1,6 +1,6 @@
 import { QuestionContainer } from '@/components/QuestionContainer';
 import Head from 'next/head'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SettingsModal } from '@/components/SettingsModal';
 import { AboutModal } from '@/components/AboutModal';
@@ -20,10 +20,14 @@ export interface Settings {
 export default function Home() {
 
     const [settings, setSettings] = useState<Settings>({
-        subjects: [0,1,2,3,4,5,6,7],
+        subjects: [0,1,2,3],
         verbs: "top25verbs" as const,
         verbTenses: ['PRESENT', 'FUTUR', 'IMPARFAIT']
     })
+
+    useEffect(() => {
+        console.log(settings)
+    }, [settings])
 
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);

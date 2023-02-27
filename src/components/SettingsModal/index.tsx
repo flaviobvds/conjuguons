@@ -5,9 +5,10 @@ import { FaTimes as CloseButton } from 'react-icons/fa'
 import { translatedText } from '@/hooks/translatedText';
 import { useLanguage } from "@/hooks/language";
 import { Settings } from '@/pages';
-import { OptionWithCheckBox } from '../OptionWithCheckBox';
+import { SubjectOptionWithCheckBox } from '../SubjectOptionWithCheckBox';
 
 import styles from './settingsModal.module.scss'
+import { TenseOptionWithCheckBox } from '../TenseOptionWithCheckBox';
 
 interface SettingsModalProps {
     isOpen: boolean;
@@ -38,14 +39,54 @@ export function SettingsModal({ isOpen, onRequestClose, settings, setSettings }:
                         Subjects
                     </h2>
 
-                    <OptionWithCheckBox option='Je' />
-                    <OptionWithCheckBox option='Tu' />
-                    <OptionWithCheckBox option='Il' />
-                    <OptionWithCheckBox option='Elle' />
-                    <OptionWithCheckBox option='Nous' />
-                    <OptionWithCheckBox option='Vous' />
-                    <OptionWithCheckBox option='Ils' />
-                    <OptionWithCheckBox option='Elles' />
+                    <SubjectOptionWithCheckBox
+                        option='Je'
+                        arrItem={0}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Tu'
+                        arrItem={1}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Il'
+                        arrItem={2}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Elle'
+                        settings={settings}
+                        arrItem={6}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Nous'
+                        arrItem={3}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Vous'
+                        arrItem={4}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Ils'
+                        arrItem={5}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <SubjectOptionWithCheckBox
+                        option='Elles'
+                        arrItem={7}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
                 </div>
 
                 <div className={styles.selectionContainer}>
@@ -56,25 +97,70 @@ export function SettingsModal({ isOpen, onRequestClose, settings, setSettings }:
                     <h3 className={styles.tenseCategory}>
                         Indicatif
                     </h3>
-                    <OptionWithCheckBox option='Présent' />
-                    <OptionWithCheckBox option='Passé Composé' />
-                    <OptionWithCheckBox option='Passé Simple' />
-                    <OptionWithCheckBox option='Imparfait' />
-                    <OptionWithCheckBox option='Plus-que-parfait' />
-                    <OptionWithCheckBox option='Futur Simple' />
+                    <TenseOptionWithCheckBox
+                        option='Présent'
+                        arrItem={'PRESENT'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <TenseOptionWithCheckBox
+                        option='Passé Composé'
+                        arrItem={'PASSE_COMPOSE'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <TenseOptionWithCheckBox
+                        option='Passé Simple'
+                        arrItem={'PASSE_SIMPLE'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <TenseOptionWithCheckBox
+                        option='Imparfait'
+                        arrItem={'IMPARFAIT'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <TenseOptionWithCheckBox
+                        option='Plus-que-parfait'
+                        arrItem={'PLUS_QUE_PARFAIT'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <TenseOptionWithCheckBox
+                        option='Futur Simple'
+                        arrItem={'FUTUR'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
 
 
                     <h3 className={styles.tenseCategory}>
                         Conditionnel
                     </h3>
-                    <OptionWithCheckBox option='Présent' />
+                    <TenseOptionWithCheckBox
+                        option='Présent'
+                        arrItem={'CONDITIONNEL_PRESENT'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
 
 
                     <h3 className={styles.tenseCategory}>
                         Subjonctif
                     </h3>
-                    <OptionWithCheckBox option='Présent' />
-                    <OptionWithCheckBox option='Imparfait' />
+                    <TenseOptionWithCheckBox
+                        option='Présent'
+                        arrItem={'SUBJONCTIF_PRESENT'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
+                    <TenseOptionWithCheckBox
+                        option='Imparfait'
+                        arrItem={'SUBJONCTIF_IMPARFAIT'}
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
                 </div>
 
                 <div className={styles.selectionContainer}>
