@@ -4,5 +4,13 @@
     font-size: 1rem;
     text-align: center;
     line-height: 3rem;
-    background-color: #3e62ff;  
+    background-color: #3152e2;
+}
+
+.learnMore {
+    //text-decoration: underline;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

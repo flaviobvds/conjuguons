@@ -18,7 +18,7 @@ export interface Settings {
 
 export default function Home() {
 
-    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(true);
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
     function handleOpenSettingsModal() {
@@ -26,6 +26,7 @@ export default function Home() {
     }
     function handleCloseSettingsModal() {
         setIsSettingsModalOpen(false);
+        document.getElementById('getNewVerb')?.click();
     }
 
     function handleOpenAboutModal() {
@@ -51,7 +52,9 @@ export default function Home() {
                         handleOpenSettings={handleOpenSettingsModal}
                     />
                     <QuestionContainer/>
-                    <Footer />
+                    <Footer 
+                        handleOpenAboutModal={handleOpenAboutModal}
+                    />
                     <SettingsModal
                         isOpen={isSettingsModalOpen}
                         onRequestClose={handleCloseSettingsModal}

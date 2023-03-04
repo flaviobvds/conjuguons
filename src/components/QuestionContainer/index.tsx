@@ -87,6 +87,7 @@ export function QuestionContainer() {
     ]
 
     useEffect(() => {
+        handleGetNewQuestion();
         document.getElementById("answerInput")!.focus();
     }, [])
 
@@ -153,6 +154,13 @@ export function QuestionContainer() {
     useEffect(() => {
         if (isCorrect != null) changeScore(isCorrect)
     }, [isCorrect])
+
+    /*
+    useEffect(() => {
+        handleGetNewQuestion();
+        document.getElementById("answerInput")!.focus();
+    }, [settings])
+    */
 
     function handleGetNewQuestion() {
         setVerb(getRandomVerb(settings.verbs)) // this will also trigger getRandomSubject inside useEffect

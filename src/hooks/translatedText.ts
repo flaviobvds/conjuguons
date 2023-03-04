@@ -55,9 +55,14 @@ export const translatedText = {
         br: 'Zerar Pontuação'
     },
     footer: {
-        fr: 'Ceci est un projet Open Source développé avec React JS, TypeScript, Next JS et SASS.',
-        en: 'This is an OpenSource project developed with ReactJS, TypeScript, NextJS and SASS.',
-        br: 'Este é um projeto Open Source desenvolvido com ReactJS, TypeScript, NextJS and SASS.'
+        fr: 'Ceci est un projet Open Source gratuit. ',
+        en: 'This is a free OpenSource project. ',
+        br: 'Este é um projeto Open Source gratuito. '
+    },
+    footer2: {
+        fr: 'En savoir plus.',
+        en: 'Learn more.',
+        br: 'Saiba mais.'
     },
     disclaimer1: {
         fr: 'Salut! Ceci est un projet Open Source gratuit créé pour aider ceux qui apprennent le français à pratiquer leur conjugaison avec plusieurs verbes, sujets et temps de verbe différents.',
