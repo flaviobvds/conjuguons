@@ -1,16 +1,14 @@
 import Modal from 'react-modal';
-import { FormEvent } from 'react';
 import { FaTimes as CloseButton } from 'react-icons/fa'
 
 import { translatedText } from '@/hooks/translatedText';
 import { useLanguage } from "@/hooks/language";
-import { useSettings } from '@/hooks/settings';
 
 import { SubjectOptionWithCheckBox } from '../SubjectOptionWithCheckBox';
 import { TenseOptionWithCheckBox } from '../TenseOptionWithCheckBox';
+import { VerbOptionsWithRadio } from '../VerbOptionsWithRadio';
 
 import styles from './settingsModal.module.scss'
-import { VerbOptionsWithRadio } from '../VerbOptionsWithRadio';
 
 
 interface SettingsModalProps {
@@ -20,7 +18,6 @@ interface SettingsModalProps {
 
 export function SettingsModal({ isOpen, onRequestClose }: SettingsModalProps) {
     const { language } = useLanguage();
-    const { settings, changeSettings } = useSettings();
 
     return (
         <Modal
@@ -90,7 +87,7 @@ export function SettingsModal({ isOpen, onRequestClose }: SettingsModalProps) {
                 </div>
             </div>
             <div className={styles.saveSettingsButton}>
-                <button>
+                <button onClick={onRequestClose}>
                     {translatedText.save[language as keyof typeof translatedText.save]}
                 </button>
             </div>

@@ -1,7 +1,6 @@
 .content {
     width: 100%;
     height: calc(100vh - 5rem - 3rem); //total viewport height minus header and footer
-    //background-color: pink;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,13 +11,15 @@
     max-width: 1120px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    //background-color: purple;
 }
 
 .leftContainer {
     max-width: 1120px;
-    margin: 0 auto;
-    //background-color: red;
+    margin: auto;
+    padding: 1.5rem 0;
+    border-radius: 20px;
+    background-color: rgb(233, 233, 233);
+    box-shadow: 1px 1px 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,8 +42,6 @@
     width: 70%;
     line-height: 2rem;
     font-size: 1.25rem;
-    //background-color: yellow;
-    //padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr 1fr 2fr 1.5fr;
@@ -51,14 +50,12 @@
 .answerContainer {
     grid-column-start: 1;
     grid-column-end: 3;
-    //background-color: grey;
     padding-top: 1.75rem;
 }
 
 .submitForm {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    //background-color: blue;
     
     * {
         display: flex;
@@ -67,7 +64,9 @@
 }
 
 .subject {
-    margin-top: 0.25rem;
+    margin-top: 3px;
+    justify-content: end;
+    padding-right: 0.5rem;
 }
 
 .answer {
@@ -77,7 +76,7 @@
     border-left: none;
     border-right: none;
     font-size: 1.25rem;
-    background-color: whitesmoke;
+    background-color: rgb(233, 233, 233);
 
     &:focus {
         outline: none;
@@ -107,7 +106,6 @@
 }
 
 .correction {
-    //background-color: green;
     grid-column-start: 1;
     grid-column-end: 3;
     display:flex;
@@ -117,7 +115,7 @@
 }
 
 .getNewVerbButton {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     padding: 0.5rem 2.5rem;
     font-size: 1.25rem;
     background-color: #3152e2;
@@ -134,5 +132,15 @@
     .divider {
         display: flex;
         flex-direction: column;
+    }
+
+    .leftContainer {
+        max-width: 80%;
+    }
+}
+
+@media (min-width: 720px) {
+    .leftContainer {
+        width: 90%;
     }
 }

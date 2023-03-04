@@ -10,12 +10,12 @@ export const translatedText = {
         br: 'Sobre'
     },
     verb: {
-        fr: 'Verbe',
+        fr: 'Verbe:',
         en: 'Verb:',
         br: 'Verbo:'
     },
     tense: {
-        fr: 'Temps',
+        fr: 'Temps:',
         en: 'Tense:',
         br: 'Tempo:'
     },

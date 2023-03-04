@@ -221,7 +221,7 @@ export function QuestionContainer() {
                                 </span>
 
                                 <input
-                                    onChange={e => setAnswer(e.target.value)}
+                                    onChange={e => setAnswer(e.target.value.toLowerCase())}
                                     value={answer}
                                     className={`${styles.answer} ${getStyle(isCorrect)}`}
                                     id="answerInput"

@@ -10,9 +10,6 @@ import { LanguageProvider, useLanguage } from '@/hooks/language';
 import { ScoreProvider } from '@/hooks/score';
 import { SettingsProvider } from '@/hooks/settings';
 
-import styles from './home.module.scss'
-import { useSettings } from '@/hooks/settings';
-
 export interface Settings {
     subjects: number[],
     verbs: 'top25verbs' | 'top50verbs' | 'top100verbs' | 'allverbs',
@@ -21,16 +18,7 @@ export interface Settings {
 
 export default function Home() {
 
-    const { settings, changeSettings } = useSettings();
-    /*
-    const [settings, setSettings] = useState<Settings>({
-        subjects: [0,1,2,3],
-        verbs: "top25verbs" as const,
-        verbTenses: ['PRESENT', 'FUTUR', 'IMPARFAIT']
-    })
-    */
-
-    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(true);
     const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
     function handleOpenSettingsModal() {

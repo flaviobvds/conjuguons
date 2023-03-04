@@ -11,7 +11,7 @@
 }
 
 body {
-    background: whitesmoke;
+    background-color: rgb(233, 233, 233);
     color: black;
 }
 
@@ -29,14 +29,26 @@ a {
     cursor: pointer;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1400px) {
     html {
         font-size: 75%;
+    }
+}
+
+@media (max-width: 1080px) {
+    html {
+        font-size: 62.5%;
     }
 }
 
 @media (max-width: 750px) {
     html {
         font-size: 56.25%;
+    }
+}
+
+@media (max-width: 320px) {
+    html {
+        font-size: 50%;
     }
 }
