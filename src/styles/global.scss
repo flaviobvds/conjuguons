@@ -52,3 +52,9 @@ a {
         font-size: 50%;
     }
 }
+
+@media (max-height: 400px) {
+    html {
+        font-size: 50%;
+    }
+}
