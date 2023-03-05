@@ -172,6 +172,7 @@ export function QuestionContainer() {
     }
 
     function getSubjectName(subjectIndex: number) {
+        if (subjectIndex == 0) return "Je / J'"
         return subjects[subjectIndex]
     }
 

@@ -21,7 +21,7 @@ export function SettingsProvider({children}: settingsProviderProps) {
     const [settings, setSettings] = useState<Settings>({
         subjects: [0,1,2,3,4,5,6,7],
         verbs: "top100verbs" as const,
-        verbTenses: ['PRESENT', 'PASSE_COMPOSE', 'PASSE_SIMPLE', 'IMPARFAIT', 'PLUS_QUE_PARFAIT', 'FUTUR']
+        verbTenses: ['PRESENT', 'PASSE_COMPOSE', 'IMPARFAIT', 'PLUS_QUE_PARFAIT', 'FUTUR']
     })
 
     useEffect(() => {
